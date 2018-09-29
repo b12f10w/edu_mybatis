@@ -18,14 +18,16 @@ public class MemberDao {
 	}
 	
 	
-	// µî·Ï
+	// ÂµÃ®Â·Ã
 	public void addMember(MemberDTO vo) {
-		
+		SqlSession ss = FactoryService.getFactory().openSession();
+  		ss.insert("member.add",vo);
+  		ss.commit();
 	}
 	public List<MemberDTO> getMember() {
 		return null;
 	}
-	// ¼öÁ¤,Á¶È¸
+	// Â¼Ã¶ÃÂ¤,ÃÂ¶ÃˆÂ¸
 	public MemberDTO getDetail(int num) {
 		return null;
 	}
