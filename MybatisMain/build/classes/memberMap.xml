@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="member">
+  	<insert id="add" parameterType="dto.MemberDTO">
+  		insert into member values(member_seq.nextval,#{id},#{pwd},#{uname},sysdate)
+  	</insert>
+  	<select id="list" resultType="dto.MemberDTO">
+  		select num,id,to_char(rdate,'yyyy-mm-dd') as rdate from member order by 1 desc
+  	</select>
+  	<select id="detail" parameterType="dto.MemberDTO" resultType="dto.MemberDTO">
+  		select num,id,to_char(rdate,'yyyy-mm-dd') as rdate from member where id = #{id}
+  	
+  	</select>
+  </mapper>
