@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksawon">
+<resultMap type="deptvo" id="deptResultMap">
+	<id column="deptno" property="deptno" javaType="int" />
+	<result column="location" property="loc" />
+</resultMap>
+<resultMap type="sawonvo" id="sawonphoneResult">
+   <id property="sabun" column="sabun"/>
+   <association property="sphone" column="sabun" javaType="sphonevo" select="sawonPhone"></association>
+</resultMap>
+
+  <select id="sawondetail" resultMap="sawonphoneResult" parameterType="int">
+	  select sabun, saname, sajob from sawon where sabun=#{sabun}
+  </select>
+
+  <select id="sawonlist" resultMap="sawonphoneResult">
+	  select sabun, saname, sajob from sawon order by 1,3 asc
+  </select>
+
+  <select id="sawonPhone" resultType="sphonevo">
+   select pnum,pmodel,phnum,to_char(pdate,'yyyy-mm-dd') pdate 
+   from sawon_phone where pnum=#{pnum}
+  </select>
+
+	<select id="sawonDept" resultMap="deptResultMap">
+		select deptno,dname,loc as location from dept order by 1 desc
+	</select>
+</mapper>
